@@ -51,10 +51,11 @@ public class MemberController {
 
     @RequestMapping("/boot/logout")
     public String logout(RedirectAttributes ra, HttpSession session) {
-        session.removeAttribute("loginUser"); // 세션에서 로그인 정보 제거
+        session.removeAttribute("loginUser");
         ra.addFlashAttribute("logoutMessage", "로그아웃되었습니다!");
-        return "redirect:/login";
+        return "redirect:/boot/index"; // ✅ 수정된 부분
     }
+
 
     @RequestMapping("vipPayment")
     public String vipPayment(RedirectAttributes redirect) {
