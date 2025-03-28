@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: src/main/webapp/jsp/
-    destination: /opt/tomcat/tomcat-10/webapps/boot/jsp/
+  - source: src/main/java/com/
+    destination: /opt/tomcat/tomcat-10/webapps/boot/WEB-INF/classes/com/
     overwrite: yes
 
 permissions:
@@ -16,4 +16,3 @@ hooks:
     - location: Scripts/deploy/deploy.sh
       timeout: 60
       runas: ubuntu
-
