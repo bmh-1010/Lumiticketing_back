@@ -38,9 +38,10 @@ public class MemberController {
     }
 
     @PostMapping("loginProc")
-    public String loginProc(String id, String pw, Model model, RedirectAttributes ra) {
+    public String loginProc(String id, String pw, Model model, RedirectAttributes ra, HttpSession session) {
         String msg = service.loginProc(id, pw);
         if(msg.equals("로그인 성공")) {
+            session.setAttribute("loginUser", id); // 세션에 사용자 정보 저장 (필수!)
             ra.addFlashAttribute("msg", msg);
             return "redirect:index";
         }
@@ -48,9 +49,9 @@ public class MemberController {
         return "member/login";
     }
 
-    @RequestMapping("logout")
+    @RequestMapping("/boot/logout")
     public String logout(RedirectAttributes ra, HttpSession session) {
-        session.removeAttribute("loginUser"); // 세션에서 해당 속성만 제거
+        session.removeAttribute("loginUser"); // 세션에서 로그인 정보 제거
         ra.addFlashAttribute("logoutMessage", "로그아웃되었습니다!");
         return "redirect:/login";
     }
